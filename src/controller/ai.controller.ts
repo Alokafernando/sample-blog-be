@@ -13,7 +13,7 @@ export const generateContent = async (req: Request, res: Response) => {
             // return res.status(403).json({message: "text is null"})
         }
 
-        const aiResponse = await axios.post("https://generativelanguage.googleapis.com/v1beta/gemini-2.0-flash:streamGenerateConten",
+        const aiResponse = await axios.post("https://generativelanguage.googleapis.com/v1beta/gemini-2.0-flash:streamGenerateContent",
             {
                 content: [
                     {
