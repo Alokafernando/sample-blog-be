@@ -42,6 +42,6 @@ export const generateContent = async (req: Request, res: Response) => {
             data: genratedContent
         })
     } catch (error) {
-        res.status(500).json({ message: "Ai generation failed" })
+        res.status(500).json({ message: error })
     }
 }
