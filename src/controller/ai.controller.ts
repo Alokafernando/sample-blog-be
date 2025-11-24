@@ -1,7 +1,5 @@
 import axios from "axios"
 import { Request, Response } from "express"
-import dotenv from "dotenv"
-dotenv.config()
 
 const AI_KEY = process.env.AI_API_KE as String
 
@@ -19,7 +17,8 @@ export const generateContent = async (req: Request, res: Response) => {
                     {
                         parts: [{ text }]
                     }
-                ], generationConfig: {
+                ],
+                generationConfig: {
                     maxOutputTokens: maxToken || 150
                 }
             },
