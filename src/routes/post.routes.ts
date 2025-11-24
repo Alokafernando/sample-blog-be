@@ -25,6 +25,6 @@ route.get(
   getMyPost
 )
 
-route.post("ai/generate", generateContent)
+route.post("/ai/generate", generateContent)
 
 export default route
