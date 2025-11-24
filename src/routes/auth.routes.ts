@@ -1,14 +1,40 @@
 import { Router } from "express"
-import { register, login, getMyDetails, registerAdmin } from "../controller/authController"
+import {
+  getMyDetails,
+  handleRefreshToken,
+  login,
+  register,
+  registerAdmin
+} from "../controller/authController"
 import { authenticate } from "../middleware/auth"
-import { isAdmin } from "../middleware/isAdmin"
-
+import { requireRole } from "../middleware/Role"
+import { Role } from "../models/User"
 
 const router = Router()
 
 router.post("/register", register)
 router.post("/login", login)
+
+
+router.post("/refresh", handleRefreshToken)
+
+// protected (USER, AUTHOR, ADMIN)
+// requireRole([Role.USER])
 router.get("/me", authenticate, getMyDetails)
-router.post("/admin/register", authenticate, isAdmin, registerAdmin);
+
+// protected
+// ADMIN only
+// need create middleware for check req is from ADMIN
+
+//   requireRole([Role.ADMIN, Role.AUTHOR]) // for admin and author both can access
+router.post(
+  "/admin/register",
+  authenticate,
+  requireRole([Role.ADMIN]),
+  registerAdmin
+)
+
+// Refresh token end point
+
 
 export default router

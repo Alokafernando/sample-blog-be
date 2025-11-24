@@ -1,5 +1,5 @@
 import dotenv from "dotenv"
-import { IUser } from "../models/user.model"
+import { IUser } from "../models/User"
 import jwt from "jsonwebtoken"
 dotenv.config()
 
@@ -17,4 +17,19 @@ export const signAccessToken = (user: IUser): string => {
         }
     )
     
+}
+
+
+const JWT_RFRESH_SECRET = process.env.JWT_REFRESH_SECRET as String
+
+export const signRefreshToken = (user: IUser): string => {
+    return jwt.sign(
+        {
+            sub: user._id.toString(),
+        },
+        JWT_SECRET,
+         {
+            expiresIn: "7d"
+        }
+    )
 }
